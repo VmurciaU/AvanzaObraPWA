@@ -1,0 +1,27 @@
+.custom-icon-css{
+    max-width: 20px !important;
+    max-height: 20px !important;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+  }
+  .swal2-icon .swal2-icon-content{
+    font-size: 20px !important;
+  }
+  .custom-error-icon{
+    margin: 20px !important;
+  }
+  
+  .custom-confirm-btn{
+    background-color: #205C46 !important;
+    margin-top: 15px !important;
+    min-width: 80%;
+  }
+  
+  .custom-cancel-btn{
+    margin-top: 20px !important;
+    min-width: 80%;
+  }
+  
+  .custom-title{
+    font-size: 20px !important;
+  }
