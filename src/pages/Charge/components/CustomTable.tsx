@@ -13,19 +13,20 @@ import { Box, Chip, IconButton, Tooltip, CircularProgress, Typography } from "@m
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 import { MRT_Localization_ES } from "../../../utils/reactTable/MRT_Localization_ES";
-import { GetStatusAll } from "../services/Services";
+import { GetChargeAll } from "../services/Services";
 
 // store
 import { handleDataDelete } from "../functions/Functions";
 import { useUserStore } from "../../../store/userStore";
 
 export interface IDataRow extends MRT_RowData {
-  id: number;
-  name: string;
-  state: number;
-  createdAt: Date;
-  updatedAt: Date;
-  createdBy?:  any;
+  id:           number;
+  name:         string;
+  description:  string;
+  state:        number | null;
+  createdAt:    Date;
+  updatedAt:    Date;
+  createdBy?:   any;
 }
 
 interface TypeComponentsTableProps {
@@ -38,8 +39,8 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["status"],
-    queryFn: () => GetStatusAll(token),
+    queryKey: ["charge"],
+    queryFn: () => GetChargeAll(token),
     retry: 2
   });
 
@@ -54,6 +55,12 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
       {
         accessorKey: "name",
         header: "Nombre",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "description",
+        header: "Descripción",
         size: 220,
         Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
       },
@@ -91,7 +98,7 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
                 onClick={async () => {
                   if (row.original.id) {
                     await handleDataDelete(token, row.original.id);
-                    queryClient.invalidateQueries({ queryKey: ["status"] });
+                    queryClient.invalidateQueries({ queryKey: ["Charge"] });
                   }
                 }}
                 aria-label="delete"

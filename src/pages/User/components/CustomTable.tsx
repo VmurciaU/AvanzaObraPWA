@@ -13,7 +13,7 @@ import { Box, Chip, IconButton, Tooltip, CircularProgress, Typography } from "@m
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 import { MRT_Localization_ES } from "../../../utils/reactTable/MRT_Localization_ES";
-import { GetStatusAll } from "../services/Services";
+import { GetUserAll } from "../services/Services";
 
 // store
 import { handleDataDelete } from "../functions/Functions";
@@ -22,10 +22,14 @@ import { useUserStore } from "../../../store/userStore";
 export interface IDataRow extends MRT_RowData {
   id: number;
   name: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  idRole: any;
+  idCharges: any;
   state: number;
   createdAt: Date;
   updatedAt: Date;
-  createdBy?:  any;
 }
 
 interface TypeComponentsTableProps {
@@ -38,8 +42,8 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["status"],
-    queryFn: () => GetStatusAll(token),
+    queryKey: ["user"],
+    queryFn: () => GetUserAll(token),
     retry: 2
   });
 
@@ -54,6 +58,36 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
       {
         accessorKey: "name",
         header: "Nombre",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "email",
+        header: "Correo Electrónico",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "password",
+        header: "Contraseña",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "phoneNumber",
+        header: "Teléfono",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "idRole",
+        header: "Rol",
+        size: 220,
+        Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
+      },
+      {
+        accessorKey: "idCharges",
+        header: "Cargo",
         size: 220,
         Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
       },
@@ -91,7 +125,7 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
                 onClick={async () => {
                   if (row.original.id) {
                     await handleDataDelete(token, row.original.id);
-                    queryClient.invalidateQueries({ queryKey: ["status"] });
+                    queryClient.invalidateQueries({ queryKey: ["Status"] });
                   }
                 }}
                 aria-label="delete"

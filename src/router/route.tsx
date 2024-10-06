@@ -18,6 +18,8 @@ const Index = React.lazy(() => import('../pages/Index/Index'));
 const Home = React.lazy(() => import('../pages/Home/Home'));
 const Role = React.lazy(() => import('../pages/Role/Role'));
 const Status = React.lazy(() => import('../pages/Status/Status'));
+const Charge = React.lazy(() => import('../pages/Charge/Charge'));
+const User = React.lazy(() => import('../pages/User/User'));
 
 // Componente de carga
 const Loading: React.FC = () => <LoadingRoute />;
@@ -84,6 +86,35 @@ const router = createBrowserRouter([
           <Layout>
             <ErrorBoundary>
               <Status />
+            </ErrorBoundary>
+          </Layout>
+        </Suspense>
+      </ProtectedLoginRoute>
+    ),
+  },
+  {
+    path: '/charge',
+    element: (
+      <ProtectedLoginRoute>
+        <Suspense fallback={<Loading />}>
+          <Layout>
+            <ErrorBoundary>
+              <Charge />
+            </ErrorBoundary>
+          </Layout>
+        </Suspense>
+      </ProtectedLoginRoute>
+    ),
+  },
+  
+  {
+    path: '/user',
+    element: (
+      <ProtectedLoginRoute>
+        <Suspense fallback={<Loading />}>
+          <Layout>
+            <ErrorBoundary>
+              <User />
             </ErrorBoundary>
           </Layout>
         </Suspense>

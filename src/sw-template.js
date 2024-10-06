@@ -43,6 +43,8 @@ const cacheNetworkFirst = [
     '/home',
     '/role',
     '/status',
+    '/charge',
+    '/user',
 ];
 
 
@@ -60,6 +62,7 @@ const bgSyncPlugin = new BackgroundSyncPlugin('post-offline', {
   maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
 });
 
+//Roles
 // Get
 registerRoute(
     new RegExp('http://localhost:3340/backend/dev/api/v1/get-role-all'),
@@ -93,7 +96,6 @@ registerRoute(
     }),
     'PUT'
 );
-
 
 // Status
 // Get
@@ -130,17 +132,73 @@ registerRoute(
     'PUT'
 );
 
+// Charge
+// Get
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/get-charge-all'),
+    new NetworkFirst()
+);
 
 
-// delete
-// registerRoute(
-//     new RegExp('http://localhost:4000/api/events'),
-//     new NetworkOnly({
-//        plugins: [bgSyncPlugin],
-//     }),
-//     'DELETE'
-// );
+// post
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/post-charge'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'POST'
+);
 
+// put
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/put-charge'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
 
+// put delete
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/delete-charge'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+// User
+// Get
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/get-user-all'),
+    new NetworkFirst()
+);
+
+// post
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/post-user'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'POST'
+);
+
+// put
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/put-user'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+// put delete
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/delete-user'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
 
 

@@ -3,7 +3,7 @@ import { ComponentsForm } from "./components/CustomForm";
 import { CustomTable } from "./components/CustomTable";
 
 
-const StatusMain: React.FC = () => {
+const ChargeMain: React.FC = () => {
 
   // manejo del id para el editar
   const [idEdit, setIdEdit] = useState<number | null>(null);
@@ -21,4 +21,4 @@ const StatusMain: React.FC = () => {
   );
 };
 
-export default StatusMain;
+export default ChargeMain;

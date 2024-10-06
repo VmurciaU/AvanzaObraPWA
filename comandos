@@ -1,0 +1,7 @@
+ToDo
+
+- Instalar Workbox-cli glbal
+  - yarn add workbox-cli --global or yarn add workbox-cli -D
+  - yarn build
+  - yarn serv add global
+  - serve -s build
