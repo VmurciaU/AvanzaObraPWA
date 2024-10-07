@@ -57,7 +57,6 @@ const ComponentsForm = ({ idEdit, onClearForm }: Props) => {
         await SaveStatus(token, data);
       }
 
-      debugger;
       reset();
       if (onClearForm) {
         onClearForm();

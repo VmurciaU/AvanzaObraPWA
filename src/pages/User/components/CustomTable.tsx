@@ -30,6 +30,9 @@ export interface IDataRow extends MRT_RowData {
   state: number;
   createdAt: Date;
   updatedAt: Date;
+  role: any;
+  charges: any;
+  tasks: any;
 }
 
 interface TypeComponentsTableProps {
@@ -80,13 +83,13 @@ const CustomTable = ({ setIdEdit }: TypeComponentsTableProps) => {
         Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
       },
       {
-        accessorKey: "idRole",
+        accessorKey: "role.name",
         header: "Rol",
         size: 220,
         Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>
       },
       {
-        accessorKey: "idCharges",
+        accessorKey: "charges.name",
         header: "Cargo",
         size: 220,
         Cell: ({ cell }) => <Box sx={{ textAlign: "center" }}>{cell.getValue() as React.ReactNode}</Box>

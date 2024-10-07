@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { GetUserById, SaveUser, UpdateUser } from "../services/Services";
 import { useUserStore } from "../../../store/userStore";
+import { GetRoleActive } from "../../Role/services/Services";
 
 // Interfaces
 interface IForms {
@@ -21,12 +22,14 @@ interface Props {
   onClearForm?: () => void;
 }
 
+
+
 const ComponentsForm = ({ idEdit, onClearForm }: Props) => {
   const token = useUserStore((state) => state.token);
   const queryClient = useQueryClient();
   const [stateBtn, setStateBtn] = useState<boolean>(true);
 
-  const { register, handleSubmit, setValue, reset } = useForm<IForms>({
+const { register, handleSubmit, setValue, reset } = useForm<IForms>({
     defaultValues: {
       name:         "",
       email:        "",
@@ -139,22 +142,32 @@ const ComponentsForm = ({ idEdit, onClearForm }: Props) => {
 
       <div className="col-span-1">
         <label className="block mb-2 text-sm font-medium text-gray-700">Rol</label>
-        <input
-          type="text"
-          placeholder="Rol"
+        <select
           {...register("idRole", { required: true })}
           className="block w-full border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
-        />
+        >
+          <option value="">Seleccionar Rol</option>
+          {dataState.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="col-span-1">
         <label className="block mb-2 text-sm font-medium text-gray-700">Cargo</label>
-        <input
-          type="text"
-          placeholder="Cargo"
+        <select
           {...register("idCharges", { required: true })}
           className="block w-full border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
-        />
+        >
+          <option value="">Seleccionar Cargo</option>
+          {dataState.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="col-span-1">
