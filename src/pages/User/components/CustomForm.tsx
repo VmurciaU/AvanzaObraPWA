@@ -28,6 +28,20 @@ const ComponentsForm = ({ idEdit, onClearForm }: Props) => {
   const token = useUserStore((state) => state.token);
   const queryClient = useQueryClient();
   const [stateBtn, setStateBtn] = useState<boolean>(true);
+  const [dataRole, setDataRole] = useState<any[]>([]);
+
+  // para llegar el campo de seleccionar rol
+  useEffect(() => {
+    const responseRole = async () => {
+      const data = await GetRoleActive(token);
+      if (data.code === 200) {
+        setDataRole(data.data.roles);
+      }
+    }
+
+    responseRole();
+
+  }, [token]);   
 
 const { register, handleSubmit, setValue, reset } = useForm<IForms>({
     defaultValues: {
@@ -51,7 +65,7 @@ const { register, handleSubmit, setValue, reset } = useForm<IForms>({
         setValue("email", data.email);
         setValue("password", data.password);
         setValue("phoneNumber", data.phoneNumber);
-        setValue("idRole", data.idRole);
+        setValue("idRole", data.role);
         setValue("idCharges", data.idCharges);
         setValue("state", data.state);
       }
@@ -141,15 +155,15 @@ const { register, handleSubmit, setValue, reset } = useForm<IForms>({
       </div>
 
       <div className="col-span-1">
-        <label className="block mb-2 text-sm font-medium text-gray-700">Rol</label>
+        <label className="block mb-2 text-sm font-medium text-gray-700">Roles</label>
         <select
           {...register("idRole", { required: true })}
           className="block w-full border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
         >
-          <option value="">Seleccionar Rol</option>
-          {dataState.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
+          <option value="">Seleccionar rol</option>
+          {dataRole.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
             </option>
           ))}
         </select>
