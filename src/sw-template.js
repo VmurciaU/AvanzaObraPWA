@@ -45,6 +45,9 @@ const cacheNetworkFirst = [
     '/status',
     '/charge',
     '/user',
+    '/client',
+    '/project',
+    '/task',
 ];
 
 
@@ -201,4 +204,108 @@ registerRoute(
     'PUT'
 );
 
+//client
+// Get
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/get-client-all'),
+    new NetworkFirst()
+);
 
+
+// post
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/post-client'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'POST'
+);
+
+// put
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/put-client'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+// put delete
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/delete-client'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+
+//project
+// Get
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/get-project-all'),
+    new NetworkFirst()
+);
+
+
+// post
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/post-project'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'POST'
+);
+
+// put
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/put-project'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+// put delete
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/delete-project'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+//task
+// Get
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/get-task-all'),
+    new NetworkFirst()
+);
+
+
+// post
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/post-task'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'POST'
+);
+
+// put
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/put-task'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);
+
+// put delete
+registerRoute(
+    new RegExp('http://localhost:3340/backend/dev/api/v1/delete-task'),
+    new NetworkOnly({
+       plugins: [bgSyncPlugin],
+    }),
+    'PUT'
+);

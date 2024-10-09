@@ -20,6 +20,9 @@ const Role = React.lazy(() => import('../pages/Role/Role'));
 const Status = React.lazy(() => import('../pages/Status/Status'));
 const Charge = React.lazy(() => import('../pages/Charge/Charge'));
 const User = React.lazy(() => import('../pages/User/User'));
+const Client = React.lazy(() => import('../pages/Client/Client'));
+const Project = React.lazy(() => import('../pages/Project/Project'));
+const Task = React.lazy(() => import('../pages/Task/Task'));
 
 // Componente de carga
 const Loading: React.FC = () => <LoadingRoute />;
@@ -115,6 +118,49 @@ const router = createBrowserRouter([
           <Layout>
             <ErrorBoundary>
               <User />
+            </ErrorBoundary>
+          </Layout>
+        </Suspense>
+      </ProtectedLoginRoute>
+    ),
+  },
+
+  {
+    path: '/client',
+    element: (
+      <ProtectedLoginRoute>
+        <Suspense fallback={<Loading />}>
+          <Layout>
+            <ErrorBoundary>
+              <Client />
+            </ErrorBoundary>
+          </Layout>
+        </Suspense>
+      </ProtectedLoginRoute>
+    ),
+  },
+  {
+    path: '/project',
+    element: (
+      <ProtectedLoginRoute>
+        <Suspense fallback={<Loading />}>
+          <Layout>
+            <ErrorBoundary>
+              <Project />
+            </ErrorBoundary>
+          </Layout>
+        </Suspense>
+      </ProtectedLoginRoute>
+    ),
+  },
+  {
+    path: '/task',
+    element: (
+      <ProtectedLoginRoute>
+        <Suspense fallback={<Loading />}>
+          <Layout>
+            <ErrorBoundary>
+              <Task />
             </ErrorBoundary>
           </Layout>
         </Suspense>
