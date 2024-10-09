@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { GetUserById, SaveUser, UpdateUser } from "../services/Services";
 import { useUserStore } from "../../../store/userStore";
 import { GetRoleActive } from "../../Role/services/Services";
+import { GetChargeActive } from "../../Charge/services/Services";
 
 // Interfaces
 interface IForms {
@@ -29,13 +30,20 @@ const ComponentsForm = ({ idEdit, onClearForm }: Props) => {
   const queryClient = useQueryClient();
   const [stateBtn, setStateBtn] = useState<boolean>(true);
   const [dataRole, setDataRole] = useState<any[]>([]);
+  const [dataCharges, setDataCharges] = useState<any[]>([]);
 
   // para llegar el campo de seleccionar rol
   useEffect(() => {
     const responseRole = async () => {
-      const data = await GetRoleActive(token);
-      if (data.code === 200) {
-        setDataRole(data.data.roles);
+      const dataRoleResponse = await GetRoleActive(token);
+      const dataChargesResponse = await GetChargeActive(token);
+
+      if (dataRoleResponse.code === 200) {
+        setDataRole(dataRoleResponse.data.roles);
+      }
+
+      if (dataChargesResponse.code === 200) {
+        setDataCharges(dataChargesResponse.data.charges);
       }
     }
 
@@ -66,7 +74,7 @@ const { register, handleSubmit, setValue, reset } = useForm<IForms>({
         setValue("password", data.password);
         setValue("phoneNumber", data.phoneNumber);
         setValue("idRole", data.role);
-        setValue("idCharges", data.idCharges);
+        setValue("idCharges", data.charges);
         setValue("state", data.state);
       }
     };
@@ -176,9 +184,9 @@ const { register, handleSubmit, setValue, reset } = useForm<IForms>({
           className="block w-full border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
         >
           <option value="">Seleccionar Cargo</option>
-          {dataState.map((item) => (
-            <option key={item.value} value={item.value}>
-              {item.label}
+          {dataCharges.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.name}
             </option>
           ))}
         </select>
