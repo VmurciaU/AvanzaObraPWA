@@ -1,0 +1,25 @@
+# Stage 1: Build
+FROM --platform=linux/amd64 node:20.10.0-alpine AS build
+WORKDIR /app
+COPY package.json ./
+RUN yarn install
+COPY . .
+RUN yarn build
+
+# Stage 2: Serve
+FROM --platform=linux/amd64 node:20.10.0-alpine
+# Install serve
+RUN yarn global add serve
+
+# Ensure the global bin directory is in PATH
+ENV PATH /usr/local/share/.config/yarn/global/node_modules/.bin:$PATH
+
+# Copy the build directory from the build stage
+COPY --from=build /app/build /app
+WORKDIR /app
+
+# Expose the port serve runs on
+EXPOSE ${FRONTEND_PORT}
+
+# Use shell form to ensure variables are expanded
+CMD serve -s . -l tcp://0.0.0.0:${FRONTEND_PORT}
