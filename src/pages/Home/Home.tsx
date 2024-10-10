@@ -1,8 +1,10 @@
 import React from 'react';
 import CustomActiveShapePieChart from './components/CustomActiveShapePieChart';
-import CustomShapeBarChart from './components/CustomShapeBarChart';
-import LegendEffectOpacity from './components/LegendEffectOpacity';
-import CardinalAreaChart from './components/CardinalAreaChart';
+// import CustomShapeBarChart from './components/CustomShapeBarChart';
+// import LegendEffectOpacity from './components/LegendEffectOpacity';
+// import CardinalAreaChart from './components/CardinalAreaChart';
+import SimpleBarChart from './components/SimpleBarChart';
+import SimpleBarChart_client from './components/SimpleBarChart_client';
 
 
 const Home: React.FC = () => {
@@ -11,12 +13,14 @@ const Home: React.FC = () => {
        <div className="container mx-auto">
 
         <div className="columns-2">
-            <LegendEffectOpacity />
-            <CustomShapeBarChart />
+            <SimpleBarChart />
+            <SimpleBarChart_client />
+            {/* <LegendEffectOpacity /> */}
+            {/* <CustomShapeBarChart /> */}
         </div>
-        <div className="columns-2">
+        <div className="columns-1">
             <CustomActiveShapePieChart />
-            <CardinalAreaChart />
+            {/* <CardinalAreaChart /> */}
         </div>
        </div>
     );

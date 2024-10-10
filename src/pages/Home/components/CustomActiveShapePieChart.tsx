@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
+  { name: 'Completada', value: 400 },
+  { name: 'Asignada', value: 300 },
+  { name: 'En progreso', value: 300 },
+  { name: 'Creada', value: 200 },
 ];
 
 const renderActiveShape = (props: any) => {
@@ -46,9 +46,9 @@ const renderActiveShape = (props: any) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${value}`}</text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`(Cantidad ${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
   );
@@ -63,7 +63,7 @@ const CustomActiveShapePieChart = () => {
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <PieChart width={400} height={400}>
+      <PieChart width={700} height={700}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}
